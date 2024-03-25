@@ -1,5 +1,5 @@
 # EX01 Developing a Simple Webserver
-## Date:21.03.2024
+## Date:25/03/2024
 
 ## AIM:
 Develop a webserver to display about the Top five Revenue generating Software Companies.
@@ -21,40 +21,65 @@ Serving the HTML pages.
 Testing the webserver.
 
 ## PROGRAM:
-```
+```python
 from http.server import HTTPServer, BaseHTTPRequestHandler
-content = """
+
+# HTML content with a list of the top 5 revenue-generating companies
+content = '''
 <!DOCTYPE html>
 <html>
 <head>
-<title>My webserver</title>
+    <title>Top 5 Revenue-Generating Companies</title>
 </head>
-<body>
-<h1><u>Top 5 Revenue Generating Companies</u><h1>
-<ul>
-<li>Apple</li>
-<li>Amazon</li>
-<li>Microsoft</li>
-<li>Samsung</li>
-<li>Google</li>
+<body style="background-color:LightCyan;">
+    <center>
+        <h1>Top 5 Revenue-Generating Companies</h1>
+    </center>
+    <center>
+        <table border="1">
+            <tr> 
+               <th></th>
+               <th>Name of the Company</th><th>Revenue(TTM)</th>
+             </tr>
+             <tr>
+               <th>1 </th>
+               <td>Microsoft Corp</td><td>$203.08 billion</td>
+             </tr>
+             <tr> 
+               <th>2 </th><td>Oracle Corp</td><td>$46.07 billion</td>
+            </tr>
+            <tr> 
+               <th>3 </th><td>SAP SE</td><td>$32.97 billion</td>
+            </tr>
+            <tr> 
+                <th>4 </th><td>Salesforce, Inc</td><td>$30.29 billion</td>
+             </tr>
+             <tr> 
+                <th>5 </th><td>Adobe Inc</td><td>$17.61 billion</td>
+             </tr>
+           </table>
+    </center>
 </body>
 </html>
-"""
-class myhandler(BaseHTTPRequestHandler):
+'''
+
+class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        print("request received")
-        self.send_response(200)
-        self.send_header('content-type', 'text/html; charset=utf-8')
+        print("Get request received...")
+        self.send_response(200) 
+        self.send_header("content-type", "text/html")       
         self.end_headers()
         self.wfile.write(content.encode())
-server_address = ('',8000)
-httpd = HTTPServer(server_address,myhandler)
-print("my webserver is running...")
+
+print("This is my webserver") 
+server_address =('',8000)
+httpd = HTTPServer(server_address,MyServer)
 httpd.serve_forever()
 ```
+
 ## OUTPUT:
 ![alt text](<Screenshot 2024-03-21 192305.png>)
-![alt text](<Screenshot 2024-03-21 192157.png>)
+![alt text](<Screenshot 2024-03-25 191727.png>)
 
 ## RESULT:
 The program for implementing simple webserver is executed successfully.
